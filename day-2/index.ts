@@ -1,6 +1,6 @@
 import fs from "fs";
 
-function getRowsFromInput(path: string) {
+export function getRowsFromInput(path: string) {
   const rows = fs
     .readFileSync(path, "utf-8")
     .split("\n")
@@ -9,7 +9,7 @@ function getRowsFromInput(path: string) {
   return rows.map((row) => row.map((el) => parseInt(el)));
 }
 
-function isGraduallyAscending({ row }: { row: number[] }) {
+export function isGraduallyAscending(row: number[]) {
   let validTestsCount = 0;
 
   for (let i = 1; i < row.length; i++) {
@@ -21,11 +21,11 @@ function isGraduallyAscending({ row }: { row: number[] }) {
   return validTestsCount === row.length - 1;
 }
 
-function isGraduallyDescending({ row }: { row: number[] }) {
+export function isGraduallyDescending(row: number[]) {
   let validTestsCount = 0;
 
   for (let i = 1; i < row.length; i++) {
-    if (row[i - 1] > row[i] && row[i] - row[i - 1] <= 3) {
+    if (row[i - 1] > row[i] && Math.abs(row[i] - row[i - 1]) <= 3) {
       validTestsCount++;
     }
   }
@@ -33,11 +33,11 @@ function isGraduallyDescending({ row }: { row: number[] }) {
   return validTestsCount === row.length - 1;
 }
 
-function countValidRows({ rows }: { rows: number[][] }) {
+export function countValidRows(rows: number[][]) {
   let validRowCount = 0;
 
   rows.forEach((row) => {
-    if (isGraduallyAscending({ row }) || isGraduallyDescending({ row })) {
+    if (isGraduallyAscending(row) || isGraduallyDescending(row)) {
       validRowCount++;
     }
   });
@@ -45,8 +45,4 @@ function countValidRows({ rows }: { rows: number[][] }) {
   return validRowCount;
 }
 
-console.log(
-  countValidRows({
-    rows: getRowsFromInput("./input.txt"),
-  })
-);
+console.log(countValidRows(getRowsFromInput("./input.txt")));
