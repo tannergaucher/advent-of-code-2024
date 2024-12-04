@@ -10,8 +10,6 @@ test("creates rows from input", () => {
 
 test("compares rows and returns the total difference", () => {
   const rows = createRowsFromInput("./input.txt");
-
   const totalDifference = compareRows(rows);
-
   expect(totalDifference).toBe(2192892);
 });
