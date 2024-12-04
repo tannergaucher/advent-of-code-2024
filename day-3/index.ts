@@ -1,14 +1,16 @@
 import fs from "fs";
 
-function getArrayFromInput(path: string) {
+export function getArrayFromInput(path: string) {
   return fs.readFileSync(path, "utf-8").split("mul(");
 }
 
-function getValidEquationTotal({ equations }: { equations: string[] }) {
+export function getValidEquationTotal({ equations }: { equations: string[] }) {
   let total = 0;
 
   equations.forEach((equation) => {
     const equationSides = equation.split(")")[0].split(",");
+
+    console.log(equationSides);
 
     if (
       isValidEquationSide(equationSides[0]) &&
@@ -27,7 +29,7 @@ console.log(
   })
 );
 
-function isValidEquationSide(side: string) {
+export function isValidEquationSide(side: string) {
   if (
     side.length > 0 &&
     side.length <= 3 &&
