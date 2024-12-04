@@ -1,11 +1,11 @@
 import fs from "fs";
 
-function createRowsFromInput(path: string) {
+export function createRowsFromInput(path: string) {
   const left: number[] = [];
   const right: number[] = [];
 
   const rows = fs
-    .readFileSync("./input.txt", "utf-8")
+    .readFileSync(path, "utf-8")
     .split("\n")
     .map((el) => el.split("   "));
 
@@ -22,7 +22,13 @@ function createRowsFromInput(path: string) {
 
 const { left, right } = createRowsFromInput("./input.txt");
 
-function compareRows({ left, right }: { left: number[]; right: number[] }) {
+export function compareRows({
+  left,
+  right,
+}: {
+  left: number[];
+  right: number[];
+}) {
   if (left.length !== right.length) {
     throw new Error("Rows must be same length");
   }
