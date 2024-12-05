@@ -4,7 +4,34 @@ export function getRowsFromInput(path: string) {
   return fs.readFileSync("./input.txt", "utf-8").split("\n");
 }
 
-export function getColumnsFromInput(path: string) {}
+export function getColumnsFromInput(path: string) {
+  const rows = getRowsFromInput("./input.txt");
+
+  if (rows.length !== rows[0].length) {
+    throw new Error("input is not grid format");
+  }
+
+  const columns: string[] = [];
+
+  let index = 0;
+  let pointer = 0;
+  let column: string[] = [];
+
+  while (columns.length !== rows[0].length) {
+    column.push(rows[index][pointer]);
+
+    if (index === rows[0].length - 1) {
+      columns.push(...column);
+      column = [];
+      index = 0;
+      pointer++;
+    } else {
+      index++;
+    }
+  }
+
+  return columns;
+}
 
 type Orientation = "regular" | "backward";
 type Direction = "left" | "right";
@@ -16,9 +43,11 @@ export function getHorizontalCount({
   row: string;
   orientation: Orientation;
 }) {
-  return [...row.matchAll(orientation === "regular" ? /XMAS/g : /SAMX/g)].map(
-    (row) => row[0]
-  );
+  const matches = [
+    ...row.matchAll(orientation === "regular" ? /XMAS/g : /SAMX/g),
+  ];
+
+  return matches.length;
 }
 
 export function getVerticalCount({
@@ -28,9 +57,11 @@ export function getVerticalCount({
   column: string;
   orientation: Orientation;
 }) {
-  return [
+  const matches = [
     ...column.matchAll(orientation === "regular" ? /XMAS/g : /SAMX/g),
-  ].map((col) => col[0]);
+  ];
+
+  return matches.length;
 }
 
 export function getDiagonalCount({
@@ -53,10 +84,10 @@ export function getDiagonalCount({
 
   for (let i = 0; i < rows[0].length - 5; i++) {
     if (
-      rows[0][i] === match[i] &&
-      rows[1][i + firstOffset] === match[i + firstOffset] &&
-      rows[2][i + secondOffset] === match[i + secondOffset] &&
-      rows[3][i + thirdOffset] === match[i + thirdOffset]
+      rows[0][i] === match[0] &&
+      rows[1][i + firstOffset] === match[1] &&
+      rows[2][i + secondOffset] === match[2] &&
+      rows[3][i + thirdOffset] === match[3]
     ) {
       count++;
     }
