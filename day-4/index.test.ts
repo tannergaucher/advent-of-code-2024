@@ -55,10 +55,25 @@ test("it gets vertical, backward orientation matches", () => {
   expect(count).toBeDefined();
 });
 
-test("it gets diagonal, regular orientation, right direction matches");
+test("it gets diagonal, regular orientation, right direction matches", () => {
+  const diagonalCount = getDiagonalCount({
+    rows: [
+      `XMMAMXMMSMXMMXMSMAXMA`,
+      `SMSAXXXXXXAMAMXAXXMMS`,
+      `SXAMSMXAMSSMMASXSSMMA`,
+      `SAXSSAMAAAXAXMAMMMAMM`,
+    ],
+    orientation: "regular",
+    direction: "right",
+  });
+
+  console.log(diagonalCount, "diagonal count");
+
+  expect(diagonalCount).toBeGreaterThan(0);
+});
 
 test("it gets diagonal, backward orientation, right direction matches");
 
 test("it gets diagonal, regular orientation, left direction matches");
 
-test("it gets diagonal, backward orientation, left direction matches");
+test("it gets diagonal, backward orientation, left direction matches", () => {});

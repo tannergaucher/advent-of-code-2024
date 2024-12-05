@@ -44,19 +44,21 @@ export function getDiagonalCount({
 }) {
   let count = 0;
 
-  const match = orientation === "regular" ? ["XMAS"] : ["SAMX"];
+  const match =
+    orientation === "regular" ? ["X", "M", "A", "S"] : ["S", "A", "M", "X"];
 
   const firstOffset = direction === "right" ? 1 : -1;
   const secondOffset = direction === "right" ? 2 : -2;
   const thirdOffset = direction === "right" ? 3 : -3;
 
-  for (let i = 0; i < rows[0].length; i++) {
+  for (let i = 0; i < rows[0].length - 5; i++) {
     if (
-      rows[i][i] === match[i] &&
-      rows[i + firstOffset][i + firstOffset] === match[i + firstOffset] &&
-      rows[i + secondOffset][i + secondOffset] === match[i + secondOffset] &&
-      rows[i + thirdOffset][i + thirdOffset] === match[i + thirdOffset]
+      rows[0][i] === match[i] &&
+      rows[1][i + firstOffset] === match[i + firstOffset] &&
+      rows[2][i + secondOffset] === match[i + secondOffset] &&
+      rows[3][i + thirdOffset] === match[i + thirdOffset]
     ) {
+      count++;
     }
   }
 
