@@ -2,13 +2,22 @@ import { test, expect } from "vitest";
 
 import {
   getRowsFromInput,
+  getColumnsFromInput,
   getHorizontalCount,
   getVerticalCount,
   getDiagonalCount,
 } from "./index";
 
 test("it gets rows from input", () => {
-  expect(getRowsFromInput("./input.txt").length).toBeGreaterThan(0);
+  const rows = getRowsFromInput("./input.txt");
+
+  expect(rows.length).toBe(140);
+});
+
+test("it gets columns from input", () => {
+  const columns = getColumnsFromInput("./input.txt");
+
+  expect(columns.length).toBe(140);
 });
 
 test("it gets horizontal, regular orientation matches", () => {
@@ -18,6 +27,8 @@ test("it gets horizontal, regular orientation matches", () => {
     row,
     orientation: "regular",
   });
+
+  console.log(count);
 
   expect(count).toBeDefined();
 });
@@ -56,7 +67,7 @@ test("it gets vertical, backward orientation matches", () => {
 });
 
 test("it gets diagonal, regular orientation, right direction matches", () => {
-  const diagonalCount = getDiagonalCount({
+  const count = getDiagonalCount({
     rows: [
       `XMMAMXMMSMXMMXMSMAXMA`,
       `SMSAXXXXXXAMAMXAXXMMS`,
@@ -67,13 +78,50 @@ test("it gets diagonal, regular orientation, right direction matches", () => {
     direction: "right",
   });
 
-  console.log(diagonalCount, "diagonal count");
-
-  expect(diagonalCount).toBeGreaterThan(0);
+  expect(count).toBe(1);
 });
 
-test("it gets diagonal, backward orientation, right direction matches");
+test("it gets diagonal, backward orientation, right direction matches", () => {
+  const count = getDiagonalCount({
+    rows: [
+      `SMMAMXMMSMXMMXMSMAXMA`,
+      `SASAXXXXXXAMAMXAXXMMS`,
+      `SXMMSMXAMSSMMASXSSMMA`,
+      `SAXXXAMAAAXAXMAMMMAMM`,
+    ],
+    orientation: "backward",
+    direction: "right",
+  });
 
-test("it gets diagonal, regular orientation, left direction matches");
+  expect(count).toBe(1);
+});
 
-test("it gets diagonal, backward orientation, left direction matches", () => {});
+test("it gets diagonal, regular orientation, left direction matches", () => {
+  const count = getDiagonalCount({
+    rows: [
+      `SMMXMXMMSMXMMXMSMAXMA`,
+      `SAMMXXXXXXAMAMXAXXMMS`,
+      `SAMMSMXAMSSMMASXSSMMA`,
+      `SAXXXAMAAAXAXMAMMMAMM`,
+    ],
+    orientation: "regular",
+    direction: "left",
+  });
+
+  expect(count).toBe(1);
+});
+
+test("it gets diagonal, backward orientation, left direction matches", () => {
+  const count = getDiagonalCount({
+    rows: [
+      `SMMSMXMMSMXMMXMSMAXMA`,
+      `SAAMXXXXXXAMAMXAXXMMS`,
+      `SMMMSMXAMSSMMASXSSMMA`,
+      `XAXXXAMAAAXAXMAMMMAMM`,
+    ],
+    orientation: "backward",
+    direction: "left",
+  });
+
+  expect(count).toBe(1);
+});
