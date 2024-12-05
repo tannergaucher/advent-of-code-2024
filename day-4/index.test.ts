@@ -3,9 +3,9 @@ import { test, expect } from "vitest";
 import {
   getRowsFromInput,
   getColumnsFromInput,
-  getHorizontalCount,
-  getVerticalCount,
+  getStraightCount,
   getDiagonalCount,
+  getTotalCount,
 } from "./index";
 
 test("it gets rows from input", () => {
@@ -20,11 +20,11 @@ test("it gets columns from input", () => {
   expect(columns.length).toBe(140);
 });
 
-test("it gets horizontal, regular orientation matches", () => {
+test("it gets straight, regular orientation matches", () => {
   const row = `XMMAMXMMSMXMMXMSMAXMAXSXMXXMXSMXXASMXSXMXMXMXMXXXXMASMSMAMMMSSSMASXMXSASXMXAAXXMMXAMXSXMASXAXMAMXXXMSAMSAMXXXMAXSAMXSAMMXXXSSMSMSSXMSMAAXXMX`;
 
-  const count = getHorizontalCount({
-    row,
+  const count = getStraightCount({
+    sequence: row,
     orientation: "regular",
   });
 
@@ -33,33 +33,11 @@ test("it gets horizontal, regular orientation matches", () => {
   expect(count).toBeDefined();
 });
 
-test("it gets horizontal, backward orientation matches", () => {
-  const row = `XMMAMXMMSMXMMXMSMAXMAXSXMXXMXSMXXASMXSXMXMXMXMXXXXMASMSMAMMMSSSMASXMXSASXMXAAXXMMXAMXSXMASXAXMAMXXXMSAMSAMXXXMAXSAMXSAMMXXXSSMSMSSXMSMAAXXMX`;
-
-  const count = getHorizontalCount({
-    row,
-    orientation: "backward",
-  });
-
-  expect(count).toBeDefined();
-});
-
-test("it gets vertical, regular orientation matches", () => {
+test("it gets straight, backward orientation matches", () => {
   const column = `XMMAMXMMSMXMMXMSMAXMAXSXMXXMXSMXXASMXSXMXMXMXMXXXXMASMSMAMMMSSSMASXMXSASXMXAAXXMMXAMXSXMASXAXMAMXXXMSAMSAMXXXMAXSAMXSAMMXXXSSMSMSSXMSMAAXXMX`;
 
-  const count = getVerticalCount({
-    column,
-    orientation: "regular",
-  });
-
-  expect(count).toBeDefined();
-});
-
-test("it gets vertical, backward orientation matches", () => {
-  const column = `XMMAMXMMSMXMMXMSMAXMAXSXMXXMXSMXXASMXSXMXMXMXMXXXXMASMSMAMMMSSSMASXMXSASXMXAAXXMMXAMXSXMASXAXMAMXXXMSAMSAMXXXMAXSAMXSAMMXXXSSMSMSSXMSMAAXXMX`;
-
-  const count = getVerticalCount({
-    column,
+  const count = getStraightCount({
+    sequence: column,
     orientation: "backward",
   });
 
@@ -124,4 +102,18 @@ test("it gets diagonal, backward orientation, left direction matches", () => {
   });
 
   expect(count).toBe(1);
+});
+
+test("it gets the total count", () => {
+  const rows = getRowsFromInput("./input.txt");
+  const columns = getColumnsFromInput("./input.txt");
+
+  const totalCount = getTotalCount({
+    rows,
+    columns,
+  });
+
+  console.log(totalCount, "total count");
+
+  expect(totalCount).toBeDefined();
 });
