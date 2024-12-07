@@ -1,9 +1,9 @@
 import { expect, test } from "vitest";
 
-import { getRowsFromInput, isGradual, countValidRows } from "./index";
+import { getRows, isGradual, countValid } from "./index";
 
-test("it gets rows from input", () => {
-  expect(getRowsFromInput("./input.txt").length).toBeGreaterThan(0);
+test("it gets rows from input text file", () => {
+  expect(getRows("./input.txt").length).toBeGreaterThan(0);
 });
 
 test("it returns true on gradually ascending sequence", () => {
@@ -31,5 +31,5 @@ test("it returns false on non-gradually descending sequence", () => {
 });
 
 test("is counts the valid rows", () => {
-  expect(countValidRows(getRowsFromInput("./input.txt"))).toBe(407);
+  expect(countValid(getRows("./input.txt"))).toBe(407);
 });

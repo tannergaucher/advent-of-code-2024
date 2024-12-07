@@ -1,6 +1,6 @@
 import fs from "fs";
 
-export function getRowsFromInput(path: string) {
+export function getRows(path: string) {
   return fs
     .readFileSync(path, "utf-8")
     .split("\n")
@@ -31,7 +31,7 @@ export function isGradual(
   return validCount === row.length - 1;
 }
 
-export function countValidRows(rows: number[][]) {
+export function countValid(rows: number[][]) {
   let validRowCount = 0;
 
   rows.forEach((row) => {
