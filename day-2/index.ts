@@ -12,23 +12,23 @@ export function isGradual(
   direction: "ascending" | "descending",
   row: number[]
 ) {
-  let validTestsCount = 0;
+  let validCount = 0;
 
   for (let i = 1; i < row.length; i++) {
     if (direction === "ascending") {
       if (row[i - 1] < row[i] && row[i] - row[i - 1] <= 3) {
-        validTestsCount++;
+        validCount++;
       }
     }
 
     if (direction === "descending") {
       if (row[i - 1] > row[i] && Math.abs(row[i] - row[i - 1]) <= 3) {
-        validTestsCount++;
+        validCount++;
       }
     }
   }
 
-  return validTestsCount === row.length - 1;
+  return validCount === row.length - 1;
 }
 
 export function countValidRows(rows: number[][]) {

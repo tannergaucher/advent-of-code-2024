@@ -69,7 +69,7 @@ export function getDiagonalCount({
   const secondOffset = direction === "right" ? 2 : -2;
   const thirdOffset = direction === "right" ? 3 : -3;
 
-  for (let i = 0; i < rows[0].length - 5; i++) {
+  for (let i = 0; i <= rows[0].length - 1; i++) {
     if (
       rows[0][i] === match[0] &&
       rows[1][i + firstOffset] === match[1] &&
@@ -98,31 +98,35 @@ export function getTotalCount({
       orientation: "regular",
     });
 
+    console.log(horizontalRegular, "hr");
+
     const horizontalBackward = getStraightCount({
       sequence: row,
       orientation: "backward",
     });
 
+    const diagonalRows = [row[i], row[i + 1], row[i + 2], row[i + 3]];
+
     const diagonalLeftRegular = getDiagonalCount({
-      rows: [row[i], row[i + 1], row[i + 2], row[i + 3]],
+      rows: diagonalRows,
       direction: "left",
       orientation: "regular",
     });
 
     const diagonalLeftBackward = getDiagonalCount({
-      rows: [row[i], row[i + 1], row[i + 2], row[i + 3]],
+      rows: diagonalRows,
       direction: "left",
       orientation: "backward",
     });
 
     const diagonalRightRegular = getDiagonalCount({
-      rows: [row[i], row[i + 1], row[i + 2], row[i + 3]],
+      rows: diagonalRows,
       direction: "right",
       orientation: "regular",
     });
 
     const diagonalRightBackward = getDiagonalCount({
-      rows: [row[i], row[i + 1], row[i + 2], row[i + 3]],
+      rows: diagonalRows,
       direction: "right",
       orientation: "backward",
     });

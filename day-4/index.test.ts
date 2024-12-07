@@ -28,8 +28,6 @@ test("it gets straight, regular orientation matches", () => {
     orientation: "regular",
   });
 
-  console.log(count);
-
   expect(count).toBeDefined();
 });
 
@@ -77,16 +75,16 @@ test("it gets diagonal, backward orientation, right direction matches", () => {
 test("it gets diagonal, regular orientation, left direction matches", () => {
   const count = getDiagonalCount({
     rows: [
-      `SMMXMXMMSMXMMXMSMAXMA`,
+      `SMMXAXMMSMXMMXMSMAXMX`,
       `SAMMXXXXXXAMAMXAXXMMS`,
-      `SAMMSMXAMSSMMASXSSMMA`,
-      `SAXXXAMAAAXAXMAMMMAMM`,
+      `SAAMSMXAMSSMMASXSSAMA`,
+      `SSXXXAMAAAXAXMAMMSAMM`,
     ],
     orientation: "regular",
     direction: "left",
   });
 
-  expect(count).toBe(1);
+  expect(count).toBe(2);
 });
 
 test("it gets diagonal, backward orientation, left direction matches", () => {
