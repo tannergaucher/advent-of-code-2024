@@ -1,10 +1,6 @@
 import { test, expect } from "vitest";
 
-import {
-  getArrayFromInput,
-  getValidEquationTotal,
-  isValidEquationSide,
-} from "./index";
+import { getArrayFromInput, getValidEquationTotal, isValidSide } from "./index";
 
 test("it returns an array from the input", () => {
   const arr = getArrayFromInput("./input.txt");
@@ -12,21 +8,21 @@ test("it returns an array from the input", () => {
 });
 
 test("it returns true on valid equation side", () => {
-  const valid = isValidEquationSide(`506`);
+  const valid = isValidSide(`506`);
   expect(valid).toBe(true);
 });
 
 test("it returns true on valid equation side", () => {
-  const valid = isValidEquationSide(`5`);
+  const valid = isValidSide(`5`);
   expect(valid).toBe(true);
 });
 
 test("it returns false on invalid equation side", () => {
-  expect(isValidEquationSide(`855how(`)).toBe(false);
+  expect(isValidSide(`855how(`)).toBe(false);
 });
 
 test("it returns false on invalid equation side", () => {
-  expect(isValidEquationSide(`8555`)).toBe(false);
+  expect(isValidSide(`8555`)).toBe(false);
 });
 
 test("it gets the valid equation total", () => {
