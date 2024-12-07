@@ -11,7 +11,7 @@ export function isValidSide(side: string) {
     side.split("").every((el) => !isNaN(parseInt(el)))
   );
 }
-// I think this can also be a reduce
+
 export function getValidEquationTotal({ equations }: { equations: string[] }) {
   let total = 0;
 

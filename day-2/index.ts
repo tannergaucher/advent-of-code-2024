@@ -31,7 +31,6 @@ export function isGradual(
   return validTestsCount === row.length - 1;
 }
 
-// this can be a reduce
 export function countValidRows(rows: number[][]) {
   let validRowCount = 0;
 
