@@ -32,13 +32,13 @@ export function isGradual(
 }
 
 export function countValid(rows: number[][]) {
-  let validRowCount = 0;
+  let validCount = 0;
 
   rows.forEach((row) => {
     if (isGradual("ascending", row) || isGradual("descending", row)) {
-      validRowCount++;
+      validCount++;
     }
   });
 
-  return validRowCount;
+  return validCount;
 }
