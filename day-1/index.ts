@@ -1,6 +1,6 @@
 import fs from "fs";
 
-export function createRowsFromInput(path: string) {
+export function createSortedRows(path: string) {
   const left: number[] = [];
   const right: number[] = [];
 
